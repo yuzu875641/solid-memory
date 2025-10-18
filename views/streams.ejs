@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>rawytjs サーバーレンダリング結果</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        .error { color: red; font-weight: bold; }
+        pre { 
+            background: #f4f4f4; 
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            overflow-x: auto; 
+            max-height: 400px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            word-break: break-all;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>rawytjs ストリーム情報表示</h1>
+    <p><a href="/">← 新しいIDを入力に戻る</a></p>
+    <p>対象Video ID: <strong><%= videoId %></strong></p>
+
+    <% if (error) { %>
+        <p class="error">エラー: <%= error %></p>
+    <% } else if (streams) { %>
+        <h2>ストリームデータ一覧</h2>
+        <p>iTag (品質/形式) をキーとし、動画ファイルの直接URLを値とするオブジェクトです。</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>iTag</th>
+                    <th>URL (抜粋)</th>
+                    <th>アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% Object.keys(streams).forEach(itag => { %>
+                    <tr>
+                        <td><%= itag %></td>
+                        <td>
+                            <%= streams[itag].substring(0, 50) + '...' + streams[itag].slice(-10) %>
+                        </td>
+                        <td>
+                            <a href="<%= streams[itag] %>" target="_blank">開く/ダウンロード</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        
+        <h3>全データ (JSON形式)</h3>
+        <pre><%= JSON.stringify(streams, null, 2) %></pre>
+
+    <% } else { %>
+        <p>データが取得されていません。</p>
+    <% } %>
+    
+</body>
+</html>
