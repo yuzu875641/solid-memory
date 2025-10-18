@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Video ID 入力</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        .error { color: red; font-weight: bold; margin-bottom: 15px; }
+        form { 
+            display: flex; 
+            flex-direction: column; 
+            width: 300px; 
+            padding: 20px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        button {
+            padding: 10px;
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #aa0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube ストリーム情報取得</h1>
+
+    <% if (error) { %>
+        <p class="error">⚠️ <%= error %></p>
+    <% } %>
+
+    <p>取得したいYouTube動画の **Video ID** を入力してください。</p>
+    <p>（例: URLが <code>https://www.youtube.com/watch?v=**dQw4w9WgXcQ**</code> の場合、IDは <code>dQw4w9WgXcQ</code> です）</p>
+
+    <form action="/get-streams" method="POST">
+        <label for="videoId">Video ID:</label>
+        <input type="text" id="videoId" name="videoId" placeholder="例: dQw4w9WgXcQ" required>
+        <button type="submit">ストリーム情報を取得</button>
+    </form>
+</body>
+</html>
