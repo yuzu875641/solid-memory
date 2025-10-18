@@ -1,0 +1,23 @@
+{
+  "name": "rawytjs-express-server",
+  "version": "1.0.0",
+  "description": "YouTube video stream data fetching and server rendering using rawytjs and Express.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "youtube",
+    "rawytjs",
+    "express",
+    "ejs",
+    "server-rendering"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "rawytjs": "^1.0.1"
+  }
+}
